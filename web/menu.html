@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão Pluvit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            background: #0f172a !important;
+        }
+
+        .dark-mode .card {
+            background: #1e293b !important;
+        }
+
+        .dark-mode h1,
+        .dark-mode h3 {
+            color: #f1f5f9 !important;
+        }
+
+        .dark-mode p {
+            color: #cbd5e1 !important;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+<!-- BOTÃO DARK MODE -->
+<button id="toggleTheme"
+    class="fixed top-4 right-4 bg-white/80 dark:bg-slate-800 px-3 py-2 rounded-lg shadow text-sm z-50 transition-all">
+    🌙
+</button>
+
+<div class="container mx-auto px-6 py-12">
+
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+            Sistema de Gestão de Obras
+        </h1>
+        <p class="text-lg text-gray-600">
+            Selecione uma opção para continuar
+        </p>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <!-- MOVIMENTAÇÕES / AUDITORIA -->
+            <div class="card bg-white rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer group" data-pagina="movimentacao.php">
+                <div class="p-8 text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200">
+                        <i class="fas fa-history text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Movimentações</h3>
+                    <p class="text-gray-600 text-sm">Quem baixou o quê</p>
+                </div>
+            </div>
+
+            <!-- HISTÓRICO INMET -->
+            <div class="card bg-white rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer group" data-pagina="buscar_historico.php">
+                <div class="p-8 text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200">
+                        <i class="fas fa-satellite-dish text-3xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Histórico INMET</h3>
+                    <p class="text-gray-600 text-sm">Estado de SP · por hora</p>
+                    <p class="text-[10px] text-blue-600 mt-2 font-semibold">
+                        <i class="fas fa-database mr-1"></i>43 estações · 2020-2026
+                    </p>
+                </div>
+            </div>
+
+            <!-- HISTÓRICO CGE -->
+            <div class="card bg-white rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer group" data-pagina="buscar_historico_cge.php">
+                <div class="p-8 text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200">
+                        <i class="fas fa-city text-3xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Histórico CGE</h3>
+                    <p class="text-gray-600 text-sm">Capital SP · por dia</p>
+                    <p class="text-[10px] text-purple-600 mt-2 font-semibold">
+                        <i class="fas fa-database mr-1"></i>36 estações · 2010-2026
+                    </p>
+                </div>
+            </div>
+
+            <!-- USUÁRIOS -->
+            <div class="card bg-white rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 cursor-pointer group" data-pagina="cadastro_login.php">
+                <div class="p-8 text-center">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-200">
+                        <i class="fas fa-users text-3xl text-orange-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Usuários</h3>
+                    <p class="text-gray-600 text-sm">Cadastro de usuários</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+// DARK MODE
+const body = document.getElementById('body');
+const btn = document.getElementById('toggleTheme');
+
+if (localStorage.getItem('tema') === 'dark') {
+    body.classList.add('dark-mode');
+    btn.textContent = '☀️';
+}
+
+btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    btn.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('tema', isDark ? 'dark' : 'light');
+});
+
+// NAVEGAÇÃO DOS CARDS
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function() {
+        const pagina = this.getAttribute('data-pagina');
+        if (pagina) {
+            window.location.href = pagina;
+        }
+    });
+});
+</script>
+
+</body>
+</html>

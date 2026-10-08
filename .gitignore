@@ -1,0 +1,42 @@
+# ============================================
+# Arquivos que NÃO vão para o GitHub
+# ============================================
+
+# Dados brutos (muito grandes)
+*.csv
+*.xlsx
+*.zip
+base de dados chuva/
+Consolidado/
+
+# Credenciais e configurações locais (SEGURANÇA)
+conexao.php
+config.php
+.env
+*.env
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos de editores
+.vscode/
+.idea/
+*.swp
+
+# Logs e temporários
+*.log
+tmp/
+temp/
+
+# Ambiente Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# Mapa e dados gerados (se quiser ignorar)
+# mapa_capital_zonas.svg
